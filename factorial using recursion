@@ -1,0 +1,23 @@
+#include<stdio.h>
+int linear(int arr[],int key,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		if(arr[i]==key)
+		return i;
+	}
+	return 0;
+}
+
+int main()
+{
+	int arr[]={10,20,30,40,50};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	int key=50;
+	int result=linear(arr,key,n);
+	if(result!=0)
+	printf("Element %d is found at %d",key,result);
+	else
+	printf("Element %d is not found in the list.");
+	return 0;
+}
