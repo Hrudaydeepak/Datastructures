@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int key;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createNode(int key) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->key = key;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insertNode(struct Node* root, int key) {
+    if (root == NULL) {
+        return createNode(key);
+    }
+    if (key < root->key) {
+        root->left = insertNode(root->left, key);
+    } else if (key > root->key) {
+        root->right = insertNode(root->right, key);
+    }
+    return root;
+}
+
+void inorderTraversal(struct Node* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        printf("%d ", root->key);
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    struct Node* root = NULL;
+    int n, key;
+    
+    printf("Enter the number of nodes in the binary search tree: ");
+    scanf("%d", &n);
+    
+    printf("Enter the keys of the nodes: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &key);
+        root = insertNode(root, key);
+    }
+    printf("Inorder traversal of the binary search tree: ");
+    inorderTraversal(root);
+
+    return 0;
+}
